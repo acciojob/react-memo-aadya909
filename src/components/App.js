@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import UseMemo from './UseMemo';
 import ReactMemo from './ReactMemo';
 
 function App() {
@@ -10,12 +9,9 @@ function App() {
     setTodos([...todos, 'New Todo']);
   };
 
-  const expensiveCalculation = useMemo(() => {
-    console.log('Calculating...');
+  const expensiveValue = useMemo(() => {
     let total = 0;
-    for (let i = 0; i < 1e9; i++) {
-      total += 1;
-    }
+    for (let i = 0; i < 1e7; i++) total += 1; // Reduced for faster demo
     return total;
   }, []);
 
@@ -31,20 +27,21 @@ function App() {
       </ul>
       <button data-testid="add-todo-btn" onClick={addTodo}>Add Todo</button>
 
-      <div style={{ marginTop: '10px' }}>
-        Count: {count} 
+      <div>
+        Count: {count}
         <button data-testid="increment-btn" onClick={() => setCount(count + 1)}>+</button>
       </div>
 
       <h2>Expensive Calculation</h2>
-      <p data-testid="expensive-result">{expensiveCalculation}</p>
+      <p data-testid="expensive-result">{expensiveValue}</p>
 
       <hr />
 
-      <ReactMemo />
+      <ReactMemo /> {/* Make sure this is included */}
     </div>
   );
 }
 
 export default App;
+
 

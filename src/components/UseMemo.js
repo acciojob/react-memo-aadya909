@@ -6,7 +6,7 @@ function expensiveCalculation(num) {
   return num;
 }
 
-function UseMemoExample() {
+function UseMemo() {
   const [number] = useState(10); // could be dynamic
   const result = useMemo(() => expensiveCalculation(number), [number]);
 
@@ -18,4 +18,4 @@ function UseMemoExample() {
   );
 }
 
-export default UseMemoExample;
+export default UseMemo
