@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const SkillList = React.memo(({ skills }) => {
-  console.log("Rendering SkillList...");
+  console.log('Rendering SkillList...');
   return (
     <ul>
       {skills.map((skill, index) => (
@@ -11,31 +11,32 @@ const SkillList = React.memo(({ skills }) => {
   );
 });
 
-function ReactMemoExample() {
+function ReactMemo() {
+  const [skills, setSkills] = useState(['HTML', 'CSS', 'JavaScript', 'React']);
   const [skillInput, setSkillInput] = useState('');
-  const [skills, setSkills] = useState(["HTML", "CSS", "JavaScript", "React"]);
 
   const addSkill = () => {
-    if (skillInput.length > 5) {
-      setSkills([...skills, skillInput]);
+    if (skillInput.trim().length > 5) {
+      setSkills([...skills, skillInput.trim()]);
       setSkillInput('');
     } else {
-      alert("Skill must be more than 5 characters.");
+      alert('Skill must be more than 5 characters.');
     }
   };
 
   return (
     <div>
-      <h2>React.memo</h2>
+      <h1>React.memo</h1>
       <input
+        data-testid="skill-input"
         type="text"
         value={skillInput}
         onChange={(e) => setSkillInput(e.target.value)}
       />
-      <button onClick={addSkill}>Add Skill</button>
+      <button data-testid="add-skill-btn" onClick={addSkill}>Add Skill</button>
       <SkillList skills={skills} />
     </div>
   );
 }
 
-export default ReactMemoExample;
+export default ReactMemo;
