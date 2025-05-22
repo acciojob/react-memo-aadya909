@@ -1,21 +1,24 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
-function expensiveCalculation(num) {
-  console.log("Calculating...");
-  for (let i = 0; i < 1000000000; i++) {} // simulate heavy task
-  return num;
-}
+const UseMemo = ({ counter }) => {
+  const expensiveCalculation = (num) => {
+    console.log('Calculating...');
+    let result = 0;
+    for (let i = 0; i < 100000000; i++) {
+      result += num;
+    }
+    return result;
+  };
 
-function UseMemo() {
-  const [number] = useState(10); // could be dynamic
-  const result = useMemo(() => expensiveCalculation(number), [number]);
+  const memoizedValue = useMemo(() => expensiveCalculation(counter), [counter]);
 
   return (
-    <div>
-      <h2>Expensive Calculation</h2>
-      <div>{result}</div>
+    <div style={{ margin: '1rem 0' }}>
+      <h3>Expensive Calculation Result:</h3>
+      <p>{memoizedValue}</p>
     </div>
   );
-}
+};
 
-export default UseMemo
+export default UseMemo;
+
